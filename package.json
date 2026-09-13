@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/45026831/hh-plus-plus.git"
+    "url": "git+https://github.com/clevervi/hh-plus-plus.git"
   },
   "author": "45026831 (Numbers)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/45026831/hh-plus-plus/issues"
+    "url": "https://github.com/clevervi/hh-plus-plus/issues"
   },
-  "homepage": "https://github.com/45026831/hh-plus-plus#readme",
+  "homepage": "https://github.com/clevervi/hh-plus-plus#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "css-loader": "^7.1.5",

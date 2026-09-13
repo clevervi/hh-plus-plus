@@ -1,5 +1,33 @@
 # hh-plus-plus
 
+> **This is a fork, kept for build and tooling work.**
+>
+> The script itself, every module, style tweak and game feature, is the work of
+> [45026831 (Numbers)](https://github.com/45026831/hh-plus-plus) and
+> [zoop0kemon](https://github.com/zoop0kemon/hh-plus-plus). New game features
+> land upstream, not here. If you want the canonical script, install it from
+> [zoop0kemon/hh-plus-plus](https://github.com/zoop0kemon/hh-plus-plus).
+>
+> What this fork changes is the plumbing: a current Node and webpack toolchain,
+> ESLint flat config, a test suite, CI, and the Sass module system. No game
+> behaviour was touched. The published userscript was checked against the
+> previous build at every step, comparing regex literals, CSS selectors and
+> inlined assets, and the emitted CSS is byte-identical.
+>
+> The credits, thanks list and Patreon link inside the script are deliberately
+> left pointing upstream.
+
+## Upstream and licensing
+
+This repository is a fork of [zoop0kemon/hh-plus-plus](https://github.com/zoop0kemon/hh-plus-plus),
+which is itself a fork of [45026831/hh-plus-plus](https://github.com/45026831/hh-plus-plus).
+Bug reports about game features belong upstream; issues here are limited to the
+build and tooling.
+
+`package.json` declares the project as ISC, but no licence text ships with it
+upstream, so none has been added here. Adding one would mean asserting terms on
+someone else's code, which is upstream's call to make.
+
 ## Installation instructions
 
 ### Desktop (Chrome, Firefox, Opera, Edge)
