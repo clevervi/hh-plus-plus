@@ -18,11 +18,16 @@ import {
 import Helpers from './common/Helpers'
 import TableAnnotation from './common/TableAnnotation'
 import Guard from './common/Guard'
+import Preflight from './common/Preflight'
 import Config from './config'
 import * as modules from './modules'
 import LeaderboardSupportersIndicatorsModule from './modules/LeaderboardSupportersIndicatorsModule'
 
 const runScript = () => {
+    // Runs first so a game-side change is reported once, up front, instead of
+    // surfacing as an unreadable TypeError from whichever module hits it.
+    Guard.run('Preflight', () => Preflight.check())
+
     const config = new Config()
 
     // base modules. The keys double as the label reported when one throws,
