@@ -1,6 +1,7 @@
 import CoreModule from '../CoreModule'
 import Helpers from '../../common/Helpers'
 import Sheet from '../../common/Sheet'
+import Guard from '../../common/Guard'
 import I18n from '../../i18n'
 
 import styles from './styles.lazy.scss'
@@ -126,7 +127,12 @@ class BattleSimulatorModule extends CoreModule {
 
     runManagedSim () {
         const isMainLeague = Helpers.isCurrentPage('leagues.html')
-        this.simManagers.forEach(simManager => {
+        // Contained per opponent: extract() reads game data and now refuses to
+        // invent numbers, so a broken read must cost that one simulation rather
+        // than the opponents queued behind it. The call is synchronous here,
+        // which matters because the leagues path runs inside an async callback
+        // where a throw would only surface as an unhandled rejection.
+        this.simManagers.forEach((simManager, index) => Guard.run(`${MODULE_KEY} opponent ${index + 1}`, () => {
             const {player, opponent} = simManager.extract()
             const {logging, preSim} = this
 
@@ -147,7 +153,7 @@ class BattleSimulatorModule extends CoreModule {
             } else {
                 simManager.display(result)
             }
-        })
+        }))
 
         if (isMainLeague) {
             $(document).trigger('league:sim-done')

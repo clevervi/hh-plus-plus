@@ -62,7 +62,7 @@ class SimHelpers {
     }
 
     static countElementsInTeam(elements) {
-        return elements.reduce((a,b)=>{a[b]++;return a}, {
+        const counts = {
             fire: 0,
             stone: 0,
             sun: 0,
@@ -71,7 +71,19 @@ class SimHelpers {
             darkness: 0,
             light: 0,
             psychic: 0
+        }
+
+        elements.forEach(element => {
+            // The element comes straight off girls[n].element_data.type. If the
+            // game adds a ninth one, counting it blindly would store NaN and
+            // every number downstream would be NaN without anything failing.
+            if (!Object.prototype.hasOwnProperty.call(counts, element)) {
+                throw new Error(`Unknown girl element "${element}" from the game; refusing to score a team the simulator does not recognise`)
+            }
+            counts[element] += 1
         })
+
+        return counts
     }
 
     static findBonusFromSynergies(synergies, element, teamGirlSynergyBonusesMissing, counts) {
@@ -109,7 +121,16 @@ class SimHelpers {
     }
 
     static calculateCritChanceShare(ownHarmony, otherHarmony) {
-        return 0.3*ownHarmony/(ownHarmony+otherHarmony)
+        // Harmony is read from the game (caracs_per_opponent[id].chance). A
+        // renamed field makes this undefined, and 0.3*undefined/NaN is NaN,
+        // which loses every comparison in Simulator.run() and would be shown
+        // as a "close" fight with a NaN chance. Report it instead of guessing.
+        const total = ownHarmony + otherHarmony
+        if (!Number.isFinite(ownHarmony) || !Number.isFinite(otherHarmony) || total <= 0) {
+            throw new Error(`Harmony from the game is unusable (own: ${ownHarmony}, other: ${otherHarmony}); refusing to report a made-up crit chance`)
+        }
+
+        return 0.3*ownHarmony/total
     }
 
     static getSkillPercentage(team, id) {

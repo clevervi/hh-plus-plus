@@ -81,3 +81,34 @@ test('a team without the skill multiplies by one', () => {
     const team = { girls: [{ skills: {} }, { skills: { 3: { skill: { percentage_value: 50 } } } }] }
     assert.equal(SimHelpers.getSkillPercentage(team, 9), 1)
 })
+
+// The game owns harmony and girl elements. When one of them stops being what the
+// script expects, the old code turned it into NaN, and NaN loses every comparison
+// in Simulator.run(), so a broken read was displayed as a 'close' fight with a NaN
+// chance. These now refuse to produce a number at all.
+
+test('unusable harmony is reported instead of turned into NaN', () => {
+    assert.throws(
+        // What a renamed field on caracs_per_opponent actually looks like.
+        () => SimHelpers.calculateCritChanceShare(undefined, undefined),
+        /Harmony from the game is unusable/,
+    )
+})
+
+test('no crit chance is invented when neither side has harmony', () => {
+    assert.throws(() => SimHelpers.calculateCritChanceShare(0, 0), /own: 0, other: 0/)
+})
+
+test('harmony that is usable still produces a share', () => {
+    assert.equal(SimHelpers.calculateCritChanceShare(100, 100), 0.15)
+    assert.equal(SimHelpers.calculateCritChanceShare(0, 100), 0)
+})
+
+test('a girl element the simulator does not know is reported by name', () => {
+    // What the game adding a ninth element would look like.
+    assert.throws(() => SimHelpers.countElementsInTeam(['fire', 'plasma']), /Unknown girl element "plasma"/)
+})
+
+test('an inherited property name does not pass as an element', () => {
+    assert.throws(() => SimHelpers.countElementsInTeam(['toString']), /Unknown girl element "toString"/)
+})
