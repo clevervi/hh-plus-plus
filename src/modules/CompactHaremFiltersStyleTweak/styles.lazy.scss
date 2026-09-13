@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 #harem_whole {
     #filtering_girls {
@@ -13,7 +13,7 @@
             grid-template-columns: 1fr 1fr; 
             justify-items: stretch;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 margin-top: 0;
             }
             
@@ -145,7 +145,7 @@
                 }
 
                 .checkbox-group {
-                    @media #{$mediaMobile} {
+                    @media #{constants.$mediaMobile} {
                         margin: 0;
                     }
 

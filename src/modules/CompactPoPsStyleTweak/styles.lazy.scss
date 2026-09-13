@@ -138,19 +138,19 @@ $rewardBGSizes: (
             .pop_thumb[pop_id="#{$id}"] {
                 & > .pop_thumb_space {
                     &:before {
-                        background-image: map-get($classIcons, $carac);
+                        background-image: map.get($classIcons, $carac);
                     }
 
                     &:after {
-                        background-image: map-get($rewardIcons, $reward);
-                        @if map-has-key($rewardBGSizes, $reward) {
-                            background-size: map-get($rewardBGSizes, $reward) !important;
+                        background-image: map.get($rewardIcons, $reward);
+                        @if map.has-key($rewardBGSizes, $reward) {
+                            background-size: map.get($rewardBGSizes, $reward) !important;
                         }
                     }
                 }
 
-                @if map-has-key($rewardBorders, $reward) {
-                    $color: map-get($rewardBorders, $reward);
+                @if map.has-key($rewardBorders, $reward) {
+                    $color: map.get($rewardBorders, $reward);
                     border-color: $color;
                     color: $color;
                 }

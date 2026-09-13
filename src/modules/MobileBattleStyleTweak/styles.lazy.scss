@@ -1,6 +1,6 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
-@media #{$mediaMobile} {
+@media #{constants.$mediaMobile} {
     #new_battle .new-battle-container {
         margin-top: 12px;
     }

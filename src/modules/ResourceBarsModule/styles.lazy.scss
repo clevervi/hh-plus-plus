@@ -1,5 +1,5 @@
-@import "../../common/mixins.scss";
-@import "../../common/constants.scss";
+@use "../../common/mixins.scss";
+@use "../../common/constants.scss";
 
 body > div#contains_all > header {
     padding-top: 8px;
@@ -17,7 +17,7 @@ body > div#contains_all > header {
         margin-left: 10px;
         margin-right: 20px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             margin-left: 0px;
             margin-right: 15px;
         }
@@ -78,13 +78,13 @@ body > div#contains_all > header {
                 font-family: Tahoma, Arial, sans-serif;
                 line-height: 11px;
 
-                @media #{$mediaMobile} {
+                @media #{constants.$mediaMobile} {
                     display: block;
                 }
 
                 span {
                     font-size: 12px;
-                    @include text-stroke-hack;
+                    @include mixins.text-stroke-hack;
 
                     #hh_comix & {
                         font-weight: normal;
@@ -98,7 +98,7 @@ body > div#contains_all > header {
             top: 22px;
             z-index: 5;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 left: 190px;
                 top: 42px;
             }
@@ -114,7 +114,7 @@ body > div#contains_all > header {
     .promo_quest_discount_text {
         left: 130px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             left: 186px;
         }
     }
@@ -122,7 +122,7 @@ body > div#contains_all > header {
     .promo_fight_discount_text {
         left: 248px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             left: 292px;
         }
     }
@@ -131,7 +131,7 @@ body > div#contains_all > header {
         left: 31px;
         top: -3px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             left: 100px;
             top: 67px !important;
         }
@@ -168,7 +168,7 @@ body > div#contains_all > header {
         grid-gap: 2px;
         margin-top: 8px;
         margin-left: 16px;
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             grid-gap: 12px;
             margin-left: 6px;
         }
@@ -266,7 +266,7 @@ body > div#contains_all > header {
                 transform-origin: top;
                 z-index: 20;
 
-                @media #{$mediaDesktop} {
+                @media #{constants.$mediaDesktop} {
                     &.mythic  {
                         transform-origin: bottom;
                     }
@@ -277,7 +277,7 @@ body > div#contains_all > header {
 
     div.currency {
         margin-left: 16px;
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             margin-left: 6px;
         }
         margin-top: 4px;
@@ -308,7 +308,7 @@ body > div#contains_all > header {
 
         .scriptMoneyContainer {
             margin-left: -1px;
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 position: absolute;
                 top: 2px;
                 left: 40px;
@@ -322,7 +322,7 @@ body > div#contains_all > header {
             position: absolute;
             left: 28px;
             font-size: 12px;
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 left: 25px;
             }
         }
@@ -361,7 +361,7 @@ body > div#contains_all > header {
 
         & + #blessings-button {
             margin-left: 5px;
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 margin-left: -42px;
                 margin-top: 34px;
             }
@@ -497,7 +497,7 @@ body > div#contains_all > header > div.energy_counter {
                     }
                 }
 
-                @media #{$mediaDesktop} {
+                @media #{constants.$mediaDesktop} {
                     justify-content: space-between;
 
                     .energy_counter_amount {
@@ -574,7 +574,7 @@ body > div#contains_all > nav > [rel="open"] {
     }
 }
 
-@media #{$mediaMobile} {
+@media #{constants.$mediaMobile} {
     body > div#contains_all > header {
         & > a.hh_logo,
         a#chat_btn,

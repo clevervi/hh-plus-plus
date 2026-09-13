@@ -1,5 +1,5 @@
-@import "../../common/constants.scss";
-@import "../../common//mixins.scss";
+@use "../../common/constants.scss";
+@use "../../common/mixins.scss";
 
 .scriptLeagueInfo {
     display: flex;
@@ -20,7 +20,7 @@
     border-radius: 5px;
     margin-left: 6px;
     margin-right: 2px;
-    @include text-stroke-hack;
+    @include mixins.text-stroke-hack;
 
     &:after {
         display: block;

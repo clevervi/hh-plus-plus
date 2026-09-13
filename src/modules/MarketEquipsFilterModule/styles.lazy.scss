@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 label.equip_filter {
     background: transparent;
@@ -8,7 +8,7 @@ label.equip_filter {
     #my-hero-equipement-tab-container & {
         top: 6rem;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 4.25rem;
         }
     }
@@ -16,7 +16,7 @@ label.equip_filter {
     #equipement-tab-container .right-container & {
         top: 3.75rem;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 3rem;
         }
     }
@@ -68,7 +68,7 @@ label.equip_filter {
         top: 3.5rem;
         left: 8rem;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 2.25rem;
         }
 
@@ -76,7 +76,7 @@ label.equip_filter {
             top: 6.5rem;
             left: 1rem;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 top: 5.25rem;
             }
         }
@@ -86,7 +86,7 @@ label.equip_filter {
         top: 3rem;
         left: 31.25rem;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 2.25rem;
         }
 
@@ -94,7 +94,7 @@ label.equip_filter {
             top: 6rem;
             left: 24.25rem;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 top: 5.25rem;
             }
         }

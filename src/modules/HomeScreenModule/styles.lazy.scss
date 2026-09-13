@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 .script-home-timer {
     color: #999;
@@ -9,25 +9,25 @@
         height: auto;
         min-height: 26px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             height: auto;
             min-height: 44px;
         }
     }
     & > a[rel="pachinko"] > .position > span {
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             width: 140px;
         }
-        @media #{$mediaDesktop} {
+        @media #{constants.$mediaDesktop} {
             width: 110px;
         }
     }
 
     & > a[rel="shop"] > .position > span {
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             width: 130px;
         }
-        @media #{$mediaDesktop} {
+        @media #{constants.$mediaDesktop} {
             width: 100px;
         }
     }
@@ -37,7 +37,7 @@
         top: 148px;
         left: 151px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 128px;
             left: 194px;
             z-index: 1;
@@ -48,10 +48,10 @@
             left: 44px;
 
             & > span {
-                @media #{$mediaMobile} {
+                @media #{constants.$mediaMobile} {
                     width: 130px;
                 }
-                @media #{$mediaDesktop} {
+                @media #{constants.$mediaDesktop} {
                     width: 100px;
                 }
             }
@@ -59,7 +59,7 @@
     }
 
     & > a[rel="god-path"] .position {
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 84px;
         }
     }
@@ -68,7 +68,7 @@
         .quest-container {
             width: 15.5rem;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 width: 17rem;
             }
         }
@@ -85,7 +85,7 @@
             margin-bottom: auto;
             align-items: center;
 
-            @media #{$mediaMobile} {
+            @media #{constants.$mediaMobile} {
                 width: 8.75rem;
             }
 
@@ -145,7 +145,7 @@
     margin-bottom: 8px;
     justify-content: center;
 
-    @media #{$mediaMobile} {
+    @media #{constants.$mediaMobile} {
         height: 40px;
         margin-top: -48px;
     }
@@ -155,7 +155,7 @@
     width: 30px;
     height: 30px;
 
-    @media #{$mediaMobile} {
+    @media #{constants.$mediaMobile} {
         width: 40px;
         height: 40px;
     }
@@ -173,7 +173,7 @@
         background-repeat: no-repeat;
         background-position: center;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             height: 22px;
             width: 22px;
         }

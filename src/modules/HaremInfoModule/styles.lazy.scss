@@ -1,5 +1,5 @@
-@import "../../common/constants.scss";
-@import "../../common/mixins.scss";
+@use "../../common/constants.scss";
+@use "../../common/mixins.scss";
 
 #harem_whole {
     .harem-info-panel {
@@ -79,7 +79,7 @@
                 }
             }
 
-            @each $element in $elements {
+            @each $element in constants.$elements {
                 .#{$element}_element_icn {
                     display: inline-block;
                     width: 20px;
@@ -95,7 +95,7 @@
                     height: 20px;
                 }
 
-                @media #{$mediaMobile} {
+                @media #{constants.$mediaMobile} {
                     display: unset;
                 }
             }
@@ -120,7 +120,7 @@
                     left: 0px;
                     vertical-align: middle;
                     color: #fff;
-                    @include text-stroke-hack;
+                    @include mixins.text-stroke-hack;
                 }
             }
 
@@ -303,7 +303,7 @@
     #harem_left div.girls_list {
         height: 23.25rem;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             height: 22rem;
         }
     }
@@ -320,7 +320,7 @@
             margin: unset;
 
             #collect_all {
-                @media #{$mediaMobile} {
+                @media #{constants.$mediaMobile} {
                     padding: 10px 20px;
                 }
             }
@@ -330,7 +330,7 @@
                 font-size: 16px;
                 line-height: 1.5;
 
-                @media #{$mediaMobile} {
+                @media #{constants.$mediaMobile} {
                     line-height: 1.25;
                 }
             }

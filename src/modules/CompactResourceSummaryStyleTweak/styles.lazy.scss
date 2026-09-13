@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 #common-popups #hero_resources_popup {
     .popup-title {
@@ -22,7 +22,7 @@
                     width: 11.5rem;
                     margin-bottom: 0.5rem;
 
-                    @media #{$mediaMobile} {
+                    @media #{constants.$mediaMobile} {
                         width: 12rem;
                         margin-right: 1rem;
                     }

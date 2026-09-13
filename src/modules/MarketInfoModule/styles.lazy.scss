@@ -1,4 +1,5 @@
-@import "../../common/constants.scss";
+@use "sass:map";
+@use "../../common/constants.scss";
 
 $classIcons: (
     "1": var(--script-class-icon-hc),
@@ -15,7 +16,7 @@ $classIcons: (
         linear-gradient(180deg, #0af 0, #068 50%, #057 51%, #0af 100%);
 }
 
-@each $carac in $classes {
+@each $carac in constants.$classes {
     #shops #equiped div.sub_block .hero_stats {
         & > [hero="carac#{$carac}"] {
             position: relative;
@@ -33,9 +34,9 @@ $classIcons: (
     }
 }
 
-@each $carac in $classes {
+@each $carac in constants.$classes {
     .my-hero-stats [carac="carac-#{$carac}"]::before {
-        background-image: map-get($classIcons, $carac);
+        background-image: map.get($classIcons, $carac);
     }
 }
 

@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 #homepage .main-container {
     .left-side-container {
@@ -179,7 +179,7 @@
                             height: 4rem;
                         }
 
-                        @media #{$mediaMobile} {
+                        @media #{constants.$mediaMobile} {
                             right: 15px;
                         }
                     }
@@ -219,7 +219,7 @@
                         right: 0;
                         top: 32px;
                         width: 227px;
-                        @media #{$mediaMobile} {
+                        @media #{constants.$mediaMobile} {
                             top: 86px;
                         }
                     }
@@ -229,7 +229,7 @@
                         right: 0;
                         top: 13.5rem;
                         width: 227px;
-                        @media #{$mediaMobile} {
+                        @media #{constants.$mediaMobile} {
                             top: 86px;
                         }
                     }
@@ -238,7 +238,7 @@
                         position: absolute;
                         right: 0;
                         top: 6rem;
-                        @media #{$mediaMobile} {
+                        @media #{constants.$mediaMobile} {
                             top: 86px;
                         }
 
@@ -282,7 +282,7 @@
 #homepage .social_links {
     margin-top: -24px;
 
-    @media #{$mediaMobile} {
+    @media #{constants.$mediaMobile} {
         margin-left: 15px;
         margin-top: 0;
     }

@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 #arena_filter_box {
     position: absolute;
@@ -16,11 +16,11 @@
     .change-team-panel & {
         right: 408px;
 
-        @media #{$mediaMobile} {
+        @media #{constants.$mediaMobile} {
             top: 98px;
         }
     
-        @media #{$mediaDesktop} {
+        @media #{constants.$mediaDesktop} {
             top: 66px;
         }
     }
@@ -125,7 +125,7 @@
         z-index: 5;
     }
 
-    @media #{$mediaMobile} {
+    @media #{constants.$mediaMobile} {
         //     top: 99px;
         //     right: 98px;
         margin-top: 5px;
@@ -148,7 +148,7 @@
     }
 }
 
-@media #{$mediaMobile} {
+@media #{constants.$mediaMobile} {
     #edit-team-page .change-team-panel.harem-panel {
         margin-top: 17px;
     }

@@ -1,4 +1,4 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
 .pop-quick-nav {
     display: flex;
@@ -8,7 +8,7 @@
     position: absolute;
     bottom: 3px;
 
-    @media #{$mediaMobile} {
+    @media #{constants.$mediaMobile} {
         width: 316px;
         bottom: 14px;
         right: 9px;

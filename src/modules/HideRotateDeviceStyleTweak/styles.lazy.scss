@@ -1,6 +1,6 @@
-@import "../../common/constants.scss";
+@use "../../common/constants.scss";
 
-@media #{$mediaMobile} {
+@media #{constants.$mediaMobile} {
     .rotate_device {
         display: none !important;
     }
