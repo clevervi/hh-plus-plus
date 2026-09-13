@@ -1,6 +1,7 @@
 import Helpers from '../common/Helpers'
 import { colors, lsKeys } from '../common/Constants'
 import Sheet from '../common/Sheet'
+import Guard from '../common/Guard'
 import Supporters from '../data/Supporters'
 import tierIconGold from '../assets/hh-plus-plus-gold.svg'
 import tierIconSilver from '../assets/hh-plus-plus-silver.svg'
@@ -159,7 +160,9 @@ class Config {
             .filter(key => key.startsWith(`${this.getConfigKey(module.group, module.configSchema.baseKey)}${CONFIG_SEP}`))
             .map(key => ({ [key.replace(`${this.getConfigKey(module.group, module.configSchema.baseKey)}${CONFIG_SEP}`, '')]: this.config[key] }))
             .reduce((a, b) => Object.assign(a, b), {})
-        module.run(subSettings)
+        // Isolated so a module broken by a game change cannot stop the ones
+        // after it, nor break the panel the user would toggle it off from.
+        Guard.run(this.getConfigKey(module.group, module.configSchema.baseKey), () => module.run(subSettings))
     }
 
     getConfigKey (group, baseKey, subKey) {

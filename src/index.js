@@ -17,6 +17,7 @@ import {
 } from './collectors'
 import Helpers from './common/Helpers'
 import TableAnnotation from './common/TableAnnotation'
+import Guard from './common/Guard'
 import Config from './config'
 import * as modules from './modules'
 import LeaderboardSupportersIndicatorsModule from './modules/LeaderboardSupportersIndicatorsModule'
@@ -24,26 +25,30 @@ import LeaderboardSupportersIndicatorsModule from './modules/LeaderboardSupporte
 const runScript = () => {
     const config = new Config()
 
-    // base modules
-    GirlDictionaryCollector.collect()
-    BlessingsCollector.collect()
-    HaremFilterCollector.collect()
-    TeamsCollector.collect()
-    EventVillainsCollector.collect()
-    SeasonStatsCollector.collect()
-    MarketInfoCollector.collect()
-    LabyrinthInfoCollector.collect()
-    LeagueInfoCollector.collect()
-    TimerCollector.collect()
-    BoosterStatusCollector.collect()
-    ClubStatusCollector.collect()
-    QuestStatusCollector.collect()
-    SidequestStatusCollector.collect()
-    PathEventCollector.collect()
+    // base modules. The keys double as the label reported when one throws,
+    // so they survive minification while the class names themselves do not.
+    const collectors = {
+        GirlDictionaryCollector,
+        BlessingsCollector,
+        HaremFilterCollector,
+        TeamsCollector,
+        EventVillainsCollector,
+        SeasonStatsCollector,
+        MarketInfoCollector,
+        LabyrinthInfoCollector,
+        LeagueInfoCollector,
+        TimerCollector,
+        BoosterStatusCollector,
+        ClubStatusCollector,
+        QuestStatusCollector,
+        SidequestStatusCollector,
+        PathEventCollector,
+    }
+    Object.entries(collectors).forEach(([name, collector]) => Guard.run(name, () => collector.collect()))
 
-    TableAnnotation.run()
+    Guard.run('TableAnnotation', () => TableAnnotation.run())
 
-    new LeaderboardSupportersIndicatorsModule().run()
+    Guard.run('LeaderboardSupportersIndicatorsModule', () => new LeaderboardSupportersIndicatorsModule().run())
 
     // configurable modules
 
@@ -60,11 +65,11 @@ const runScript = () => {
         iconEl: '<div></div>'
     })
 
-    Object.values(modules).forEach(module => {
-        config.registerModule(new module())
+    Object.entries(modules).forEach(([name, Module]) => {
+        Guard.run(name, () => config.registerModule(new Module()))
     })
 
-    config.loadConfig()
+    Guard.run('loadConfig', () => config.loadConfig())
 
     config.runModules()
 
