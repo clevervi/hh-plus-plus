@@ -1,0 +1,5 @@
+# Every checkout must be byte-identical so the build is reproducible across
+# platforms. SVG assets are inlined into the userscript as base64, so a CRLF
+# checkout emits different data URIs than an LF one, and the published bundle
+# then depends on which OS built it.
+* text=auto eol=lf

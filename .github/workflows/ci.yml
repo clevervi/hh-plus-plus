@@ -30,14 +30,12 @@ jobs:
       - run: npm run build-all
 
       # dist/ is what users install from, so a source change that was never
-      # rebuilt would ship stale code. Only the published artefacts are checked:
-      # the dev bundle is built with webpack's eval devtool, which embeds module
-      # source verbatim, so its bytes follow the checkout's line endings and are
-      # not comparable across platforms.
-      - name: Check published userscript is up to date with src
+      # rebuilt would ship stale code. .gitattributes pins every checkout to LF,
+      # which is what makes this comparison meaningful across platforms.
+      - name: Check dist is up to date with src
         run: |
-          if ! git diff --exit-code --ignore-cr-at-eol -- dist/hh-plus-plus.user.js dist/hh-plus-plus.meta.js; then
-            echo "::error::The published userscript is out of date - run 'npm run build-all' and commit dist/"
+          if ! git diff --exit-code -- dist/; then
+            echo "::error::dist/ is out of date - run 'npm run build-all' and commit the result"
             exit 1
           fi
 
