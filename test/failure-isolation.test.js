@@ -1,39 +1,11 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const fs = require('node:fs')
-const path = require('node:path')
-const vm = require('node:vm')
 
-const bundle = fs.readFileSync(path.resolve(__dirname, '..', 'dist', 'hh-plus-plus.user.js'), 'utf8')
-
-// Evaluates the built userscript in a bare sandbox. Without jQuery on the fake
-// window the script registers its globals and then bails out before touching the
-// page, which is exactly far enough to exercise what it exposes.
-const loadBundle = () => {
-    const errors = []
-    const sandbox = {
-        console: { log: () => {}, warn: () => {}, error: (...args) => errors.push(args) },
-        location: { pathname: '/home.html', hostname: 'www.hentaiheroes.com', search: '', href: '' },
-        document: { documentElement: { lang: 'en' }, getElementById: () => null, addEventListener: () => {} },
-        navigator: { userAgent: 'node' },
-        setTimeout,
-        clearTimeout,
-        setInterval,
-        clearInterval,
-    }
-    sandbox.window = sandbox
-    sandbox.globalThis = sandbox
-    vm.runInNewContext(bundle, sandbox, { filename: 'hh-plus-plus.user.js' })
-    const api = sandbox.window.HHPlusPlus
-    // Arrays built inside the sandbox belong to another realm, so copy them
-    // out before comparing or strict deepEqual trips on the prototype.
-    const failures = () => Array.from(api.Guard.getFailures()).map(({ name, error }) => ({ name, error }))
-    return { api, errors, failures }
-}
+const { loadBundle } = require('./support/game-page.js')
 
 test('the userscript exposes its helpers on window.HHPlusPlus', () => {
     const { api } = loadBundle()
-    for (const key of ['Guard', 'Helpers', 'Sheet', 'I18n']) {
+    for (const key of ['Guard', 'Preflight', 'Helpers', 'Sheet', 'I18n', 'Simulator', 'SimHelpers']) {
         assert.ok(api[key], `window.HHPlusPlus.${key} is missing`)
     }
 })

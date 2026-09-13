@@ -13,7 +13,7 @@
     "generate-module": "node ./build/generate-module.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "node --test",
+    "test": "node --test \"test/*.test.js\"",
     "css:dump": "node ./build/dump-css.js"
   },
   "repository": {
