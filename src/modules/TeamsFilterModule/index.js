@@ -96,7 +96,7 @@ class TeamsFilterModule extends CoreModule {
                 }
                 const otherFields = ['skill_tier', 'aff_category', 'aff_lvl', 'blessed', 'equiped', 'level_cap']
                 otherFields.forEach(field => $(`#filter_${field}`).selectric())
-    
+
                 this.blessings = Helpers.lsGet(lsKeys.BLESSINGS) || {}
                 await this.getFilterGirlData()
                 $('h3.panel-title').append(`<span class="script-girl-count">(<span class="filtered-count"></span>${I18n.nThousand(this.arenaGirls.length)})</span>`)
@@ -173,7 +173,7 @@ class TeamsFilterModule extends CoreModule {
         let girlsFilteredCount = 0
         this.girlsData.forEach((girl, index) => {
             const {name, element, role, rarity, class: girl_class, equips, skill_tiers, grade, graded, level, level_cap} = girl
-            const is_blessed = this.blessings?.current?.blessings?.some(({key, value}) => 
+            const is_blessed = this.blessings?.current?.blessings?.some(({key, value}) =>
                 (key.includes('colors') ? girl?.[key]?.includes(value) : girl?.[key] === value) || (key === 'rarity' && value === 'common' && girl?.[key] === 'starting')) || false
 
             let girlMaches = true

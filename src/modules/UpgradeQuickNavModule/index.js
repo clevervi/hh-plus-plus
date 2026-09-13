@@ -243,7 +243,7 @@ class UpgradeQuickNavModule extends CoreModule {
         totalHTML += Snippets.selectInput({
             id: 'filter-sort',
             label: GT.design.haremdex_sort_by,
-            options: ['date_recruited', 'level', 'power', 'grade', 'name'].flatMap((option, index) => 
+            options: ['date_recruited', 'level', 'power', 'grade', 'name'].flatMap((option, index) =>
                 ['asc', 'desc'].map(direction => ({label: `${GT.design[SORT_LABELS[index]]} ${direction === 'asc' ? '▲' : '▼'}`, value: `${option}__${direction}`}))
             ),
             className: 'script-filter-sort',

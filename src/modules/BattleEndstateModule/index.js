@@ -122,26 +122,26 @@ class BattleEndstateModule extends CoreModule {
                     {e: $playerBar, p: {width: fPlayerEgoBarWidth.toFixed(2) + '%'}, o: {duration: 200}},
                     {e: $playerDamageBar, p: {width: fPlayerEgoBarWidth.toFixed(2) + '%'}, o: {duration: 200}},
                     {e: $playerDamageDone, p: {opacity: [0, 1], translateY: -20, translateZ: 0}, o: {
-                            duration: 300,
-                            sequenceQueue: false,
-                            complete: function(elm) {
-                                $playerEgo.text(GT.ego + ' ' + nPlayerFinalEgo.toString())
-                                $(elm).velocity({translateY: 0}, 0)
-                            }
+                        duration: 300,
+                        sequenceQueue: false,
+                        complete: function(elm) {
+                            $playerEgo.text(GT.ego + ' ' + nPlayerFinalEgo.toString())
+                            $(elm).velocity({translateY: 0}, 0)
                         }
+                    }
                     }
                 ]
                 const arrOpponentAnimationSequence = [
                     {e: $opponentBar, p: {width: fOpponentEgoBarWidth.toFixed(2) + '%'}, o: {duration: 200}},
                     {e: $opponentDamageBar, p: {width: fOpponentEgoBarWidth.toFixed(2) + '%'}, o: {duration: 200}},
                     {e: $opponentDamageDone, p: {opacity: [0, 1], translateY: -20, translateZ: 0}, o: {
-                            duration: 300,
-                            sequenceQueue: false,
-                            complete: function(elm) {
-                                $opponentEgo.text(GT.ego + ' ' + nOpponentFinalEgo.toString())
-                                $(elm).velocity({translateY: 0}, 0)
-                            }
+                        duration: 300,
+                        sequenceQueue: false,
+                        complete: function(elm) {
+                            $opponentEgo.text(GT.ego + ' ' + nOpponentFinalEgo.toString())
+                            $(elm).velocity({translateY: 0}, 0)
                         }
+                    }
                     }
                 ]
 
@@ -169,7 +169,7 @@ class BattleEndstateModule extends CoreModule {
 
             Helpers.doWhenSelectorAvailable('#new-battle-skip-btn, .skip-buttons-container', () => {
                 // $('#new-battle-skip-btn').click(() => {
-                    // TODO show end state of battle
+                // TODO show end state of battle
                 // })
                 $('#new-battle-skip-btn, .skip-buttons-container').show()
             })

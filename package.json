@@ -3,13 +3,18 @@
   "version": "1.41.7",
   "description": "Adding things here and there in the Hentai Heroes game. Also supports HHCore-based games such as GH and CxH.",
   "private": "true",
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "build": "webpack",
     "build-dev": "webpack --mode=development",
     "build-all": "npm run build && npm run build-dev",
     "generate-module": "node ./build/generate-module.js",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:fix": "eslint . --fix",
+    "test": "node --test",
+    "css:dump": "node ./build/dump-css.js"
   },
   "repository": {
     "type": "git",
@@ -22,15 +27,16 @@
   },
   "homepage": "https://github.com/45026831/hh-plus-plus#readme",
   "devDependencies": {
-    "css-loader": "^6.5.1",
-    "eslint": "^7.32.0",
-    "sass": "^1.45.0",
-    "sass-loader": "^12.4.0",
-    "style-loader": "^3.3.1",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.53.0",
-    "webpack-cli": "^4.8.0"
+    "@eslint/js": "^10.0.1",
+    "css-loader": "^7.1.5",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
+    "sass": "^1.104.1",
+    "sass-loader": "^17.0.1",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.6.1",
+    "webpack": "^5.110.3",
+    "webpack-cli": "^7.2.3"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8"

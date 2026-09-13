@@ -148,7 +148,7 @@ class ChampionsModule extends CoreModule {
                         const impression = parseInt(challenge_impression_done)
                         const percentage = impression / totalImpression
                         const shards = calculateCCShardProjection(percentage, totalPositiveImpressionParticipants)
-        
+
                         const $cellHTML = $(`
                             <div>${I18n.nThousand(impression)}</div>
                             <div>${I18n.nRounding(percentage * 100, 2, 0)}% / <span class="shard_icn"></span> x ${shards}</div>

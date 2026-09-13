@@ -94,12 +94,12 @@ class LeagueInfoModule extends CoreModule {
 
     fixLeagueSorting () {
         Helpers.doWhenSelectorAvailable('.league_table .data-list', () => {
-            // fix / adjust sorting 
+            // fix / adjust sorting
             //FIX LATTER
             if (window.isColumnSortable) {
                 const isColumnSortable_actual = window.isColumnSortable
                 const hook = (column_name, settings) => {
-                    if (column_name === "team") {return true}
+                    if (column_name === 'team') {return true}
                     return isColumnSortable_actual(column_name, settings)
                 }
                 window.isColumnSortable = hook
@@ -330,7 +330,7 @@ class LeagueInfoModule extends CoreModule {
         const filters = {
             fought_opponent: {
                 label: 'filterFoughtOpponents',
-                type: "radio",
+                type: 'radio',
                 options: [
                     {value: false, icon: 'quest/ic_eyeopen.svg'},
                     {value: true, icon: 'quest/ic_eyeclosed.svg'}
@@ -338,7 +338,7 @@ class LeagueInfoModule extends CoreModule {
             },
             boosted: {
                 label: 'filterBoosted',
-                type: "radio",
+                type: 'radio',
                 options: [
                     {value: false, icon: 'quest/ic_eyeopen.svg'},
                     {value: true, icon: 'quest/ic_eyeclosed.svg'}
@@ -346,7 +346,7 @@ class LeagueInfoModule extends CoreModule {
             },
             team_theme: {
                 label: 'filterTeamTheme',
-                type: "checkbox",
+                type: 'checkbox',
                 options: [
                     {value: 'darkness', icon: 'pictures/girls_elements/Dominatrix.png'},
                     {value: 'light', icon: 'pictures/girls_elements/Submissive.png'},
@@ -388,9 +388,9 @@ class LeagueInfoModule extends CoreModule {
                 <span>${this.label(label)}</span>
                 <div class="grid-selector" rel="${id}">
                     ${options.map(option => {
-                        const {value, icon} = option
-                        return createGridSelectorItem({id, type, value, icon})
-                    }).join('')}
+        const {value, icon} = option
+        return createGridSelectorItem({id, type, value, icon})
+    }).join('')}
                 </div>
             `
         }
@@ -539,7 +539,7 @@ class LeagueInfoModule extends CoreModule {
                     max = normalisedDuration
                 }
 
-                $(el).wrap(`<div class="circular-progress"></div>`).before(buildBoosterProgress(current, max))
+                $(el).wrap('<div class="circular-progress"></div>').before(buildBoosterProgress(current, max))
                 if (current == 0) {
                     $(el).addClass('expired')
                 }

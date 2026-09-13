@@ -364,10 +364,10 @@ class Helpers {
     }
 
     static getHref (url) {
-        if (Helpers.getPlatform() === 'nutaku' && (url.includes(Helpers.getHost()) ||  !url.includes("http")) && !url.includes("sess=")) {
+        if (Helpers.getPlatform() === 'nutaku' && (url.includes(Helpers.getHost()) ||  !url.includes('http')) && !url.includes('sess=')) {
             const {PLATFORM_SESS} = window
             const searchParams = new URLSearchParams(window.location.search)
-            const sess = typeof PLATFORM_SESS === "string" ?  PLATFORM_SESS : searchParams.get("sess")
+            const sess = typeof PLATFORM_SESS === 'string' ?  PLATFORM_SESS : searchParams.get('sess')
 
             if (sess) {
                 return url.includes('?') ? `${url}&sess=${sess}` : `${url}?sess=${sess}`
@@ -384,7 +384,7 @@ class Helpers {
         if (base_caracs) {
             const {level, graded, equips, class: g_class, skills} = girl
             const blessings = Helpers.lsGet(lsKeys.BLESSINGS) || {}
-            const blessing_bonuses = blessings?.current?.blessings?.map(({key, value, bonus}) => 
+            const blessing_bonuses = blessings?.current?.blessings?.map(({key, value, bonus}) =>
                 (key.includes('colors') ? girl?.[key]?.includes(value) : girl?.[key] === value) || (key === 'rarity' && value === 'common' && girl?.[key] === 'starting') ? bonus : 0) || []
 
             stats = base_caracs.map((carac, index) => {

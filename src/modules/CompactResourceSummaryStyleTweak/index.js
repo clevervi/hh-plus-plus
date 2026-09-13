@@ -56,7 +56,7 @@ class CompactResourceSummaryStyleTweak extends STModule {
                         })
                         $('.hero-currency:has(.ticket_icn)').after('<div class="line-break" style="order: -1"></div>')
                         // Move and minify scroll exchange button
-                        $('#hero-scroll-currencies').siblings('p').wrap(`<div id='hero-scroll-currencies-title'></div>`)
+                        $('#hero-scroll-currencies').siblings('p').wrap('<div id=\'hero-scroll-currencies-title\'></div>')
                         $('#hero-scroll-currencies #scrolls-exchange').attr('class', 'round_blue_button').html('<span class="exchange_icn"></span>').appendTo('#hero-scroll-currencies-title')
 
                         Object.entries(response.progressions).forEach(([progression, {amount}]) => {

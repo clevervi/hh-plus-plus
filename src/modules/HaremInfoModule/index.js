@@ -27,7 +27,7 @@ const SALARY_TIMES = [30, 90, 270, 420, 420, 420, 420]
 
 const getGemCostFromLevelCap = (level_cap, rarity) => {
     const {awakening_requirements} = window
-    return awakening_requirements.slice((level_cap-250)/50 + 1).reduce((sum, {cost}) => sum += (cost*GEM_COST_MULTIPLIERS[rarity]), 0)
+    return awakening_requirements.slice((level_cap-250)/50 + 1).reduce((sum, {cost}) => sum + (cost*GEM_COST_MULTIPLIERS[rarity]), 0)
 }
 
 class HaremInfoModule extends CoreModule {

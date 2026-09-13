@@ -74,7 +74,7 @@ class ImprovedWaifuModule extends CoreModule {
                 let fav = girlInfo.fav || false
 
                 let display = (waifuInfo.display === undefined)?  !!parseInt(waifu.display) : waifuInfo.display
-                let $eye = $(".eye")
+                let $eye = $('.eye')
                 Helpers.doWhenSelectorAvailable('.waifu-container', () => {
                     setTimeout(() => {
                         // if hidden, put girl and re setup hide button
@@ -85,9 +85,9 @@ class ImprovedWaifuModule extends CoreModule {
                                 $('#bg_all').addClass('blur-effect')
                             }
                         }
-                        
+
                         // wait to replace default behavior of eye button
-                        $eye.prop("onclick", null).off("click")
+                        $eye.prop('onclick', null).off('click')
                         $eye.click(() => {
                             $('.waifu-container>img').eq(0).toggleClass('hide')
                             $('.diamond-bar').eq(0).toggleClass('hide')
@@ -186,7 +186,7 @@ class ImprovedWaifuModule extends CoreModule {
                 })
 
                 // waifu-edit
-                let editing = false, panning = false;
+                let editing = false, panning = false
                 let scale, x, y
                 try {scale = girlInfo.pose[selected_grade].scale || 1} catch {scale = 1}
                 try {x = girlInfo.pose[selected_grade].x || 0} catch {x = 0}
@@ -195,14 +195,14 @@ class ImprovedWaifuModule extends CoreModule {
                     x: x,
                     y: y,
                 }
-                let start = {x:0, y:0};
+                let start = {x:0, y:0}
                 $edit_pose.click(() => {
-                    $(".waifu-edit div").toggleClass("hide")
+                    $('.waifu-edit div').toggleClass('hide')
                     editing = true
                 })
 
                 $save_pose.click(() => {
-                    $(".waifu-edit div").toggleClass("hide")
+                    $('.waifu-edit div').toggleClass('hide')
                     editing = false
                     if (cord.x != 0 || cord.y != 0 || scale != 1) {
                         if (!girlInfo.pose) {girlInfo.pose = {}}
@@ -221,11 +221,11 @@ class ImprovedWaifuModule extends CoreModule {
                     $('.waifu-container>img').eq(0).css('transform','')
                     cord = {x:0, y:0}
                     start = {x:0, y:0}
-                    scale = 1;
+                    scale = 1
                 })
 
                 function setTransform() {
-                    $('.waifu-container>img').eq(0).css('transform',`translate(${Math.round(cord.x)}px, ${Math.round(cord.y)}px) scale(${scale})`);
+                    $('.waifu-container>img').eq(0).css('transform',`translate(${Math.round(cord.x)}px, ${Math.round(cord.y)}px) scale(${scale})`)
                 }
 
                 Helpers.doWhenSelectorAvailable('.waifu-container>img', () => {
@@ -238,42 +238,42 @@ class ImprovedWaifuModule extends CoreModule {
                         }
                     })
                     observer.observe(waifu_image[0], {attributes: true, attributeFilter: ['style']})
-                    setTransform();
+                    setTransform()
 
                     waifu_image.mousedown(function (e) {
-                        if (!editing) {return;}
-                        e.preventDefault();
+                        if (!editing) {return}
+                        e.preventDefault()
                         start = {x: e.clientX-cord.x, y: e.clientY-cord.y}
-                        panning = true;
+                        panning = true
                     })
                     waifu_image.mouseup(function (e) {
                         if (!editing) {return}
-                        e.preventDefault();
-                        panning = false;
+                        e.preventDefault()
+                        panning = false
                     })
                     waifu_image.mouseleave(function (e) {
                         if (!editing) {return}
-                        panning = false;
+                        panning = false
                     })
                     waifu_image.mousemove(function (e) {
                         if(!panning||!editing) {return}
                         cord = {x: e.clientX - start.x, y: e.clientY-start.y}
-                        setTransform();
+                        setTransform()
                     })
                     waifu_image.bind('wheel', function (e) {
                         if (!editing) {return}
-                        e.preventDefault();
+                        e.preventDefault()
                         const offset = waifu_image.offset(), old_scale = scale
                         const point = {x: e.clientX-offset.left, y: e.clientY-offset.top}
                         if(e.originalEvent.deltaY < 0) {
-                            scale += 0.1;
+                            scale += 0.1
                         } else {
-                            scale = Math.max(scale-0.05, 0.1);
+                            scale = Math.max(scale-0.05, 0.1)
                         }
                         // translation needs improvment
                         cord = {x: cord.x-(scale/old_scale-1)*(point.x-size.width*old_scale),
-                                y: cord.y-(scale/old_scale-1)*(point.y-size.height*old_scale)}
-                        setTransform();
+                            y: cord.y-(scale/old_scale-1)*(point.y-size.height*old_scale)}
+                        setTransform()
                     })
                 })
 
@@ -282,7 +282,7 @@ class ImprovedWaifuModule extends CoreModule {
                     $($diamond).click(() => {
                         if (selected_grade!=index && $($diamond).hasClass('unlocked')) {
                             if (editing) {
-                                $(".waifu-edit div").toggleClass("hide")
+                                $('.waifu-edit div').toggleClass('hide')
                                 editing = false
                             }
                             $('.diamond.unlocked').eq(selected_grade).removeClass('selected')
@@ -294,7 +294,7 @@ class ImprovedWaifuModule extends CoreModule {
                             try {x = girlInfo.pose[selected_grade].x || 0} catch {x = 0}
                             try {y = girlInfo.pose[selected_grade].y || 0} catch {y = 0}
                             cord = {x: x, y: y}
-                            setTransform();
+                            setTransform()
                             girlInfo.grade = selected_grade
                             this.saveWaifuInfo(waifuInfo)
                         }
@@ -368,7 +368,7 @@ class ImprovedWaifuModule extends CoreModule {
                     cord = {x: x, y: y}
 
                     $('.waifu-container>img').eq(0).attr('src', `${Helpers.getCDNHost()}/pictures/girls/${girl_id}/ava${selected_grade}.png`)
-                    setTransform();
+                    setTransform()
                     $('.girls-name a').eq(0).text(dictGirl.name)
                     $('.diamond').each(function (index) {
                         index == selected_grade ? $(this).addClass('selected') : $(this).removeClass('selected')
@@ -382,7 +382,7 @@ class ImprovedWaifuModule extends CoreModule {
                         index > max_grade ? $(this).addClass('hide') : $(this).removeClass('hide')
                     })
                     if (editing) {
-                        $(".waifu-edit div").toggleClass("hide")
+                        $('.waifu-edit div').toggleClass('hide')
                         editing = false
                     }
                     if (fav) {
@@ -451,7 +451,7 @@ class ImprovedWaifuModule extends CoreModule {
 
     saveWaifuInfo (waifuInfo) {
         // clear empty objects to save a bit on local storage
-        let copiedWaifuInfo = JSON.parse(JSON.stringify(waifuInfo));
+        let copiedWaifuInfo = JSON.parse(JSON.stringify(waifuInfo))
         for (let girl in copiedWaifuInfo.girls) {
             const girl_info = copiedWaifuInfo.girls[girl]
             if (girl_info.pose) {

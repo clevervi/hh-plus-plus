@@ -505,8 +505,8 @@ class ResourceBarsModule extends CoreModule {
             }
         }
 
-        
-        
+
+
         boosterStatus.normal.forEach(data => {
             buildSlotAndAddTooltip(buildNormalSlot, data)
         })

@@ -70,13 +70,13 @@ class PachinkoNamesModule extends CoreModule {
                     <div class="availableOnly">
                         ${girlList.length ? this.label('availableGirls') : ''}
                         ${girlList.map(({name, id_girl, rarity}) => {
-                            if (name) {
-                                const wikiLink = Helpers.getWikiLink(name, id_girl, I18n.getLang())
-                                return `<${!wikiLink ? 'span' : `a href="${wikiLink}" target="_blank"`} class="availableGirl ${rarity}-text">${name.replace(' ', ' ')}</${!wikiLink ? 'span' : 'a'}>`
-                            } else {
-                                return '<span class="unknownGirl">????</span>'
-                            }
-                        }).join(', ')}
+        if (name) {
+            const wikiLink = Helpers.getWikiLink(name, id_girl, I18n.getLang())
+            return `<${!wikiLink ? 'span' : `a href="${wikiLink}" target="_blank"`} class="availableGirl ${rarity}-text">${name.replace(' ', ' ')}</${!wikiLink ? 'span' : 'a'}>`
+        } else {
+            return '<span class="unknownGirl">????</span>'
+        }
+    }).join(', ')}
                     </div>
                     <div class="fullPool">
                         ${girlPool.length ? this.label('poolGirls') : ''}

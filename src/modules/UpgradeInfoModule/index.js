@@ -78,7 +78,7 @@ class UpgradeInfoModule extends CoreModule {
                 }
                 $script_current.text(` ${I18n.nThousand(current)}`)
             }
-    
+
             addResourceCurrent()
             const resource_observer = new MutationObserver(() => {
                 addResourceCurrent()
@@ -114,12 +114,12 @@ class UpgradeInfoModule extends CoreModule {
         const inventories = ['#equipment .inventory', '#equipment .item-column .equipment_slot']
 
         const equip_observer = new MutationObserver(() => {
-            $(`#equipment .slot_girl_armor`).each((i, slot) => {
+            $('#equipment .slot_girl_armor').each((i, slot) => {
                 const $slot = $(slot)
                 const {resonance_bonuses} = JSON.parse($slot.attr('data-d'))
 
                 if (!$slot.find('.item_resonances').length && Object.keys(resonance_bonuses).length) {
-                    const $item_resonanceses = $(`<div class="item_resonances"></div>`)
+                    const $item_resonanceses = $('<div class="item_resonances"></div>')
 
                     Object.entries(resonance_bonuses).forEach(([key, bonus]) => {
                         const matches = girl[key] == bonus.identifier ? ' matches' : ''

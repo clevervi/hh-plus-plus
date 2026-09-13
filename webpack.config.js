@@ -1,7 +1,6 @@
-/* eslint-env node */
 const path = require('path')
 const webpack = require('webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const BannerBuilder = require('./build/BannerBuilder')
 
 const banner = BannerBuilder.buildBanner()
@@ -17,14 +16,12 @@ const config = {
         rules: [
             {
                 test: /\.svg$/i,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8192,
-                        },
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 8192,
                     },
-                ],
+                },
             },
             {
                 test: /\.lazy\.scss$/i,
@@ -38,18 +35,18 @@ const config = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 parallel: true,
-                uglifyOptions: {
-                    output: {
+                // The userscript metadata block must survive minification, so all
+                // other comments are stripped and the banner is re-added verbatim.
+                extractComments: false,
+                terserOptions: {
+                    format: {
                         beautify: false,
+                        comments: false,
                         preamble: banner,
                     },
-                    sourceMap: {
-                        url: 'inline',
-                    },
                 },
-                sourceMap: false,
             }),
         ],
     },

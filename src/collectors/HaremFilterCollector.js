@@ -34,7 +34,7 @@ class HaremFilterCollector {
                 const onDraft = (response) => {
                     const {teamArray} = response
                     const girl_ids = teamArray.map(girl => parseInt(girl.id_girl))
-                    
+
                     Helpers.lsSet(lsKeys.HAREM_FILTER_IDS, girl_ids)
                 }
                 Helpers.onAjaxResponse(/action=team_draft/, onDraft)

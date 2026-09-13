@@ -1,5 +1,4 @@
 import HHModule from './HHModule'
-import Helpers from '../common/Helpers'
 
 class STModule extends HHModule {
     constructor (props) {

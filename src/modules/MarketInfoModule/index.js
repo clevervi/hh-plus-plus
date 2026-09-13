@@ -278,7 +278,7 @@ class MarketInfoModule extends CoreModule {
                         $('.bonus-given-container [carac*="def"]').attr('carac', 'defense')
                     })
                 }
-                
+
                 fixDefCarac()
                 $('button[rel=buy-stats-multiplier]').on('click', () => {
                     fixDefCarac()

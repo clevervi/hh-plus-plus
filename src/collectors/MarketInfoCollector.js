@@ -57,7 +57,7 @@ class MarketInfoCollector {
     }
 
     static collectRefreshTime () {
-        const {Hero: {infos: {level}}} = window.shared ? window.shared : window 
+        const {Hero: {infos: {level}}} = window.shared ? window.shared : window
         const {server_now_ts, restock_time} = window
         marketInfo.refreshTime = server_now_ts + restock_time
         marketInfo.refreshLevel = level

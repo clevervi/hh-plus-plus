@@ -390,7 +390,7 @@ class LabyrinthInfoModule extends CoreModule {
                 return `
                 <div class="relic-container ${rarity}-relic${type === 'girl' ? ' large-card' : ''}">
                     <div class="relic-name">${GT.design[`${identifier}_name`]} <span>${GT.design[`girls_rarity_${rarity}`]}</span></div>
-                    <div class="relic-description">${GT.design[`${identifier}_description`].replace("[percent_chance]", bonus)}</div>
+                    <div class="relic-description">${GT.design[`${identifier}_description`].replace('[percent_chance]', bonus)}</div>
                     <div class="relic-infos">
                         ${type === 'team' && relic_icon ? `
                         <div class="team-relic-icon">

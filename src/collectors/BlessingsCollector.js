@@ -39,12 +39,13 @@ const collectWeekInfo = (week, time) => {
         case 'zodiac':
             value = Object.entries(GT.zodiac).find(zodiac => zodiac[1] === value_raw)?.at(0)
             break
-        case 'figure':
+        case 'figure': {
             const fig_index = GT.figures.indexOf(value_raw)
             if (fig_index > -1) {
                 value = fig_index
             }
             break
+        }
         case 'rarity':
             value = RARITIES.find(rarity => GT.design[`girls_rarity_${rarity}`] === value_raw)
             break

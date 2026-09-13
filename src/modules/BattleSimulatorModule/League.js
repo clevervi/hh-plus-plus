@@ -115,7 +115,7 @@ class League {
             const re_chance = caracs.chance
 
             if (damage === re_damage && defense === re_defense && remaining_ego === re_ego && chance === re_chance) {
-                console.log("Pass")
+                console.log('Pass')
             } else {
                 console.log(damage, defense, remaining_ego, chance)
                 console.log(re_damage, re_defense, re_ego, re_chance)
