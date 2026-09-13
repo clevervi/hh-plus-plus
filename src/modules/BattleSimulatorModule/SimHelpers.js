@@ -134,7 +134,21 @@ class SimHelpers {
     }
 
     static getSkillPercentage(team, id) {
-        return 1 + (team.girls.map(e => e.skills[id]?.skill.percentage_value ?? 0).reduce((a, b) => a+b, 0) / 100)
+        // A team with no girls at all is not a team, so that is worth reporting.
+        if (!team || !Array.isArray(team.girls)) {
+            throw new Error(`Team read from the game has no girls array; cannot total skill ${id}`)
+        }
+
+        // Individual girls are a different matter: a slot can be empty and a girl
+        // can arrive without her skills, which the element handling above already
+        // allows for. Either way she adds nothing to this skill, which is what
+        // the ?? 0 always meant. The old chain only guarded skills[id], so a girl
+        // with no skills object at all threw and took the whole simulation down.
+        const total = team.girls
+            .map(girl => girl?.skills?.[id]?.skill?.percentage_value ?? 0)
+            .reduce((a, b) => a + b, 0)
+
+        return 1 + (total / 100)
     }
 }
 

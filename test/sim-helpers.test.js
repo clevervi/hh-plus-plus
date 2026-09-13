@@ -112,3 +112,31 @@ test('a girl element the simulator does not know is reported by name', () => {
 test('an inherited property name does not pass as an element', () => {
     assert.throws(() => SimHelpers.countElementsInTeam(['toString']), /Unknown girl element "toString"/)
 })
+
+// Reported from a real league page: "Cannot read properties of undefined
+// (reading '9')" thrown from getSkillPercentage, through extract and
+// runManagedSim, escaping an async callback as an unhandled rejection. The
+// girls arrive incomplete, which League already allows for when reading their
+// elements, so the skill total has to allow for it too.
+
+test('a girl who arrives without her skills simply adds nothing', () => {
+    const team = { girls: [
+        { skills: { 9: { skill: { percentage_value: 10 } } } },
+        {},
+    ] }
+    assert.equal(SimHelpers.getSkillPercentage(team, 9), 1.1)
+})
+
+test('an empty team slot adds nothing', () => {
+    const team = { girls: [undefined, null, { skills: { 9: { skill: { percentage_value: 25 } } } }] }
+    assert.equal(SimHelpers.getSkillPercentage(team, 9), 1.25)
+})
+
+test('a skill entry without its skill body adds nothing', () => {
+    assert.equal(SimHelpers.getSkillPercentage({ girls: [{ skills: { 9: {} } }] }, 9), 1)
+})
+
+test('a team with no girls at all is reported', () => {
+    assert.throws(() => SimHelpers.getSkillPercentage({}, 9), /has no girls array/)
+    assert.throws(() => SimHelpers.getSkillPercentage(undefined, 9), /has no girls array/)
+})
