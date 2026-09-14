@@ -140,3 +140,42 @@ test('a team with no girls at all is reported', () => {
     assert.throws(() => SimHelpers.getSkillPercentage({}, 9), /has no girls array/)
     assert.throws(() => SimHelpers.getSkillPercentage(undefined, 9), /has no girls array/)
 })
+
+// Same family as the getSkillPercentage crash, found by grepping for it: all
+// three extract() paths read the player's seven team slots directly, while
+// League guards the opponent's a few lines later. A short team threw, in the
+// branch that only runs when the game's element data was already missing.
+
+test('a full team reports every element in slot order', () => {
+    const team = { girls: ['fire', 'water', 'fire', 'stone', 'sun', 'light', 'nature']
+        .map(type => ({ element_data: { type } })) }
+    assert.deepEqual(Array.from(SimHelpers.getTeamElementTypes(team)), ['fire', 'water', 'fire', 'stone', 'sun', 'light', 'nature'])
+})
+
+test('a team short of seven girls reports only the ones present', () => {
+    const team = { girls: [{ element_data: { type: 'fire' } }, { element_data: { type: 'water' } }] }
+    assert.deepEqual(Array.from(SimHelpers.getTeamElementTypes(team)), ['fire', 'water'])
+})
+
+test('an empty slot or a girl without element data is skipped', () => {
+    const team = { girls: [
+        { element_data: { type: 'fire' } },
+        undefined,
+        {},
+        { element_data: {} },
+        { element_data: { type: 'stone' } },
+    ] }
+    assert.deepEqual(Array.from(SimHelpers.getTeamElementTypes(team)), ['fire', 'stone'])
+})
+
+test('what it returns can always be counted', () => {
+    // The pairing that used to throw before countElementsInTeam was reached.
+    const team = { girls: [{ element_data: { type: 'fire' } }, undefined] }
+    const counts = SimHelpers.countElementsInTeam(SimHelpers.getTeamElementTypes(team))
+    assert.equal(counts.fire, 1)
+})
+
+test('a team with no girls array is reported', () => {
+    assert.throws(() => SimHelpers.getTeamElementTypes({}), /has no girls array/)
+    assert.throws(() => SimHelpers.getTeamElementTypes(undefined), /has no girls array/)
+})

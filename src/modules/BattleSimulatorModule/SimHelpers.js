@@ -108,6 +108,21 @@ class SimHelpers {
         }
     }
 
+    static getTeamElementTypes(team) {
+        if (!team || !Array.isArray(team.girls)) {
+            throw new Error('Team read from the game has no girls array; cannot read its elements')
+        }
+
+        // Mirrors how League already reads the opponent team a few lines later:
+        // a slot can be empty and a girl can arrive without her element data.
+        // Indexing all seven slots blindly threw on a short team, and it did so
+        // in the branch that only runs when the game's own element data was
+        // already missing, which is the worst place to assume it is complete.
+        return [0, 1, 2, 3, 4, 5, 6]
+            .map(slot => team.girls[slot]?.element_data?.type)
+            .filter(type => typeof type === 'string')
+    }
+
     static calculateThemeFromElements(elements) {
         const counts = SimHelpers.countElementsInTeam(elements)
 

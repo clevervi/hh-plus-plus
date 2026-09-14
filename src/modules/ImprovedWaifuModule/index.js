@@ -415,7 +415,11 @@ class ImprovedWaifuModule extends CoreModule {
 
                         if (fav) {
                             waifuInfo.girls[id]? waifuInfo.girls[id].fav = true : waifuInfo.girls[id] = {fav: true}
-                        } else {
+                        } else if (waifuInfo.girls[id]) {
+                            // The line above already allows for a girl with no
+                            // stored entry; un-favouriting one threw instead,
+                            // and this runs in a click handler, so nothing
+                            // caught it and the save never happened.
                             delete waifuInfo.girls[id].fav
                         }
                         this.saveWaifuInfo(waifuInfo)
