@@ -159,10 +159,36 @@
         }
     }
 
+    .script-diagnostics {
+        border: 1px solid rgba(255, 138, 0, 0.7);
+        border-radius: 6px;
+        background: rgba(255, 138, 0, 0.12);
+        padding: 8px 12px;
+        margin-bottom: 12px;
+
+        h3 {
+            margin: 0 0 4px;
+            color: #ffa23e;
+        }
+
+        p {
+            margin: 2px 0;
+            font-size: 13px;
+            // Module names can run long, and a report is useless truncated.
+            word-break: break-word;
+        }
+    }
+
     .toggle-credits {
         position: absolute;
         top: 6px;
         right: 56px;
+
+        // The only hint on the closed panel that there is something to read.
+        &.has-diagnostics {
+            box-shadow: 0 0 0 2px #ffa23e;
+            border-radius: 50%;
+        }
     }
 }
 

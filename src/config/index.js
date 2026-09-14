@@ -2,6 +2,7 @@ import Helpers from '../common/Helpers'
 import { colors, lsKeys } from '../common/Constants'
 import Sheet from '../common/Sheet'
 import Guard from '../common/Guard'
+import Preflight from '../common/Preflight'
 import Supporters from '../data/Supporters'
 import tierIconGold from '../assets/hh-plus-plus-gold.svg'
 import tierIconSilver from '../assets/hh-plus-plus-silver.svg'
@@ -238,6 +239,42 @@ class Config {
         )
     }
 
+    // Guard names whatever failed and Preflight names whatever the game stopped
+    // providing, but both only ever reached the console, where no player looks.
+    // Surfacing them here is what makes a bug report say which module died
+    // instead of "nothing works".
+    buildDiagnostics () {
+        const failures = Guard.getFailures()
+        const missing = Preflight.getMissing()
+
+        if (!failures.length && !missing.length) {
+            return ''
+        }
+
+        const names = [...new Set(failures.map(({name}) => name))]
+
+        return `
+        <div class="script-diagnostics">
+            <h3>Something did not run</h3>
+            <p>The game changed under the script. Everything else kept working. Quote this when reporting it.</p>
+            ${missing.length ? `<p><b>Missing from the page:</b> ${missing.join(', ')}</p>` : ''}
+            ${names.length ? `<p><b>Skipped:</b> ${names.join(', ')}</p>` : ''}
+        </div>`
+    }
+
+    // Rebuilt on every open: a module can fail long after the pane was created,
+    // on an ajax response or a page the player reaches later.
+    refreshDiagnostics () {
+        if (!this.$configPane) {
+            return
+        }
+
+        const html = this.buildDiagnostics()
+        this.$configPane.find('.script-diagnostics').remove()
+        this.$configPane.find('.credits-contents').prepend(html)
+        this.$configPane.find('.toggle-credits').toggleClass('has-diagnostics', Boolean(html))
+    }
+
     buildCreditsPane () {
         const {CHANGELOG, SPECIAL_THANKS, PATREON, DISCORD} = window.HHPlusPlus
         const {script: scriptInfo} = GM_info
@@ -302,6 +339,7 @@ class Config {
             // rendering lazily here so that all modules should have been registered at this point
             this.renderConfigPane()
         }
+        this.refreshDiagnostics()
         this.$configPane.addClass('shown')
         this.configPaneOpen = true
     }

@@ -26,6 +26,10 @@ const CONTRACTS = [
     {name: 'shared.timer.format_time_short', get: () => resolve('timer').format_time_short},
 ]
 
+// Remembered so the config panel can show what was missing without running
+// the check again, which would warn a second time for the same thing.
+let lastMissing = []
+
 class Preflight {
     static check () {
         const missing = CONTRACTS
@@ -46,7 +50,13 @@ class Preflight {
             )
         }
 
+        lastMissing = missing
+
         return missing
+    }
+
+    static getMissing () {
+        return lastMissing.slice()
     }
 }
 

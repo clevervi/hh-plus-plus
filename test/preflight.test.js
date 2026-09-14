@@ -47,3 +47,33 @@ test('the game moving Hero out from under shared is caught', () => {
     assert.match(warnings[0], /Hero\.infos/)
     assert.match(warnings[0], /getFailures/)
 })
+
+// The config panel reads the result back rather than re-running the check,
+// because a second run would warn again for the same thing every time the
+// player opens the panel.
+
+test('the result is readable again without warning a second time', () => {
+    const { missing, warnings, api } = loadBundle({ ...sharedPage, shared: { timer } })
+
+    const first = missing()
+    assert.equal(warnings.length, 1)
+
+    assert.deepEqual(Array.from(api.Preflight.getMissing()), first)
+    assert.deepEqual(Array.from(api.Preflight.getMissing()), first)
+    assert.equal(warnings.length, 1, 'reading the result must not warn again')
+})
+
+test('an intact page has nothing to report back', () => {
+    const { api, missing } = loadBundle(sharedPage)
+    missing()
+    assert.deepEqual(Array.from(api.Preflight.getMissing()), [])
+})
+
+test('the caller cannot corrupt the stored result', () => {
+    const { api, missing } = loadBundle({ ...sharedPage, shared: { timer } })
+    missing()
+
+    api.Preflight.getMissing().push('not real')
+
+    assert.deepEqual(Array.from(api.Preflight.getMissing()), ['Hero.infos', 'Hero.energies', 'Hero.update'])
+})
