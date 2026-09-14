@@ -1,18 +1,33 @@
 # hh-plus-plus
 
-> **This is a fork, kept for build and tooling work.**
+> **A maintained build. The script is not mine.**
 >
-> The script itself, every module, style tweak and game feature, is the work of
+> Every module, style tweak and game feature is the work of
 > [45026831 (Numbers)](https://github.com/45026831/hh-plus-plus) and
 > [zoop0kemon](https://github.com/zoop0kemon/hh-plus-plus). New game features
 > land upstream, not here. If you want the canonical script, install it from
 > [zoop0kemon/hh-plus-plus](https://github.com/zoop0kemon/hh-plus-plus).
 >
-> What this fork changes is the plumbing: a current Node and webpack toolchain,
-> ESLint flat config, a test suite, CI, and the Sass module system. No game
-> behaviour was touched. The published userscript was checked against the
-> previous build at every step, comparing regex literals, CSS selectors and
-> inlined assets, and the emitted CSS is byte-identical.
+> What this repository adds is everything around that script:
+>
+> - A toolchain that installs and builds on current Node. It had stopped doing
+>   both: `npm ci` failed on a peer conflict and the build crashed on OpenSSL 3.
+> - A test suite and CI on Node 22 and 24, plus a reproducible build.
+> - Failure isolation. The script reads globals the game owns, so a rename
+>   upstream used to take the whole thing down, config panel included. Now a
+>   startup check names what the page stopped providing, each collector and
+>   module is contained on its own, and the config panel shows what was
+>   skipped instead of leaving it in the console where nobody looks.
+> - Three crashes fixed, found by running it: a girl arriving without her
+>   skills, a team shorter than seven, and un-favouriting a waifu with no
+>   stored entry. Those fixes are offered back upstream, since they are bugs
+>   there too and not something this fork introduced.
+>
+> Every toolchain change was checked against the previous build, comparing
+> regex literals, CSS selectors and inlined assets; the emitted CSS is
+> byte-identical. The only deliberate behaviour changes are the three fixes
+> above and refusing to display a battle prediction computed from data the
+> game did not actually provide.
 >
 > The credits, thanks list and Patreon link inside the script are deliberately
 > left pointing upstream.
