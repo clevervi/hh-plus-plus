@@ -15,7 +15,7 @@
 // @updateURL       https://raw.githubusercontent.com/clevervi/hh-plus-plus/main/dist/hh-plus-plus.user.js
 // @downloadURL     https://raw.githubusercontent.com/clevervi/hh-plus-plus/main/dist/hh-plus-plus.user.js
 // @grant           none
-// @author          45026831 (Numbers), zoopokemon
+// @author          45026831 (Numbers), zoopokemon (script), clevervi (build)
 // ==/UserScript==
 
 window.HHPlusPlus={

@@ -20,7 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/clevervi/hh-plus-plus.git"
   },
-  "author": "45026831 (Numbers)",
+  "author": "45026831 (Numbers), zoopokemon (script), clevervi (build)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/clevervi/hh-plus-plus/issues"
